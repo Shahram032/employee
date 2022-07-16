@@ -16,7 +16,7 @@ class Menu extends Component {
   getHeader(caption) {
     return (
       <a className="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
-        {CustomIcon("FaHome", 25, "Orange")}
+        {CustomIcon("FaHome", 25, "Pruple")}
         <span className="fs-6 fw-bold m-2">{caption}</span>
       </a>
     );
