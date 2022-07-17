@@ -7,7 +7,7 @@ class Menu extends Component {
 
   render() {
     return (
-      <div className="menu-header flex-shrink-0 p-3">
+      <div className="menu-header flex-shrink-0 p-3 ">
         {this.getHeader("سامانه جامع مدیریت منابع انسانی")}
         {this.getMenu("اطلاعات پایه", "base")}
         {this.getMenu("عملیات اصلی", "main")}
@@ -19,8 +19,8 @@ class Menu extends Component {
   getHeader(caption) {
     return (
       <a className="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
-        {CustomIcon("FaHome", 25, "Orange")}
-        <span className="fs-6 fw-bold m-2 text-white">{caption}</span>
+        {CustomIcon("FaUserAlt", 25, "Orange")}
+        <span className="fs-6 fw-bold m-2">{caption}</span>
       </a>
     );
   }

@@ -1,10 +1,10 @@
 .menu-header {
   width: 280px;
-  background-color: rgb(56, 82, 155);
   font-family: "calibri";
   cursor: pointer;
   margin: 2px;
-  border-radius: 5px;
+  border-radius: 15px;
+  border: 5px solid #212529;
 }
 
 main {
