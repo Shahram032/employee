@@ -8,7 +8,7 @@ class Menu extends Component {
   render() {
     return (
       <div className="menu-header flex-shrink-0 p-3 ">
-        {this.getHeader("سامانه جامع مدیریت منابع انسانی")}
+        {this.getHeader("سامانه کارگزینی")}
         {this.getMenu("اطلاعات پایه", "base")}
         {this.getMenu("عملیات اصلی", "main")}
         {this.getMenu("گزارشات", "rep")}
