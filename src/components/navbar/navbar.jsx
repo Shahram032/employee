@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import "./navbar.css";
-import logo from "../../assets/shah.jpg";
 import CustomIcon from "../menu/icons/customIcon";
 
 class NavBar extends Component {
   state = {};
   render() {
     return (
-      <nav className="navbar navbar-expand-lg bg-dark">
+      <nav className="navbar navbar-expand-lg bg-dark mt-1 mb-1 rounded">
         <div className="container-fluid">
           <button
             className="navbar-toggler"
