@@ -7,7 +7,7 @@ class Menu extends Component {
 
   render() {
     return (
-      <div className="menu-header flex-shrink-0 p-3 ">
+      <div className="menu-header flex-shrink-0 p-3 shadow rounded">
         {this.getHeader("سامانه کارگزینی")}
         {this.getMenu("اطلاعات پایه", "base")}
         {this.getMenu("عملیات اصلی", "main")}

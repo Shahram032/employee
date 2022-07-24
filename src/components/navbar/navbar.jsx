@@ -6,7 +6,7 @@ class NavBar extends Component {
   state = {};
   render() {
     return (
-      <nav className="navbar navbar-expand-lg bg-dark mt-1 mb-1 rounded">
+      <nav className="navbar navbar-expand-lg bg-light nav rounded shadow">
         <div className="container-fluid">
           <button
             className="navbar-toggler"
@@ -28,7 +28,7 @@ class NavBar extends Component {
             <ul className="navbar-nav">
               <li className="nav-item dropdown">
                 <a
-                  className="nav-link dropdown-toggle text-warning"
+                  className="nav-link dropdown-toggle"
                   href="#"
                   id="navbarDropdown"
                   role="button"
@@ -38,21 +38,21 @@ class NavBar extends Component {
                   اداری
                 </a>
                 <ul
-                  className="dropdown-menu bg-dark"
+                  className="dropdown-menu bg-light"
                   aria-labelledby="navbarDropdown"
                 >
                   <li>
-                    <a className="dropdown-item text-warning" href="#">
+                    <a className="dropdown-item" href="#">
                       کارگزینی
                     </a>
                   </li>
                   <li>
-                    <a className="dropdown-item text-warning" href="#">
+                    <a className="dropdown-item" href="#">
                       حضور و غیاب
                     </a>
                   </li>
                   <li>
-                    <a className="dropdown-item text-warning" href="#">
+                    <a className="dropdown-item" href="#">
                       ارزشیابی
                     </a>
                   </li>
@@ -60,7 +60,7 @@ class NavBar extends Component {
               </li>
               <li className="nav-item dropdown">
                 <a
-                  className="nav-link dropdown-toggle text-warning"
+                  className="nav-link dropdown-toggle"
                   href="#"
                   id="navbarDropdown"
                   role="button"
@@ -70,21 +70,21 @@ class NavBar extends Component {
                   مالی
                 </a>
                 <ul
-                  className="dropdown-menu bg-dark"
+                  className="dropdown-menu bg-light"
                   aria-labelledby="navbarDropdown"
                 >
                   <li>
-                    <a className="dropdown-item text-warning" href="#">
+                    <a className="dropdown-item" href="#">
                       کارگزینی
                     </a>
                   </li>
                   <li>
-                    <a className="dropdown-item text-warning" href="#">
+                    <a className="dropdown-item" href="#">
                       حضور و غیاب
                     </a>
                   </li>
                   <li>
-                    <a className="dropdown-item text-warning" href="#">
+                    <a className="dropdown-item" href="#">
                       ارزشیابی
                     </a>
                   </li>
@@ -92,7 +92,7 @@ class NavBar extends Component {
               </li>
               <li className="nav-item dropdown">
                 <a
-                  className="nav-link dropdown-toggle text-warning"
+                  className="nav-link dropdown-toggle"
                   href="#"
                   id="navbarDropdown"
                   role="button"
@@ -102,21 +102,21 @@ class NavBar extends Component {
                   پشتیبانی
                 </a>
                 <ul
-                  className="dropdown-menu bg-dark"
+                  className="dropdown-menu bg-light"
                   aria-labelledby="navbarDropdown"
                 >
                   <li>
-                    <a className="dropdown-item text-warning" href="#">
+                    <a className="dropdown-item" href="#">
                       کارگزینی
                     </a>
                   </li>
                   <li>
-                    <a className="dropdown-item text-warning" href="#">
+                    <a className="dropdown-item" href="#">
                       حضور و غیاب
                     </a>
                   </li>
                   <li>
-                    <a className="dropdown-item text-warning" href="#">
+                    <a className="dropdown-item" href="#">
                       ارزشیابی
                     </a>
                   </li>
@@ -124,7 +124,7 @@ class NavBar extends Component {
               </li>
               <li className="nav-item dropdown">
                 <a
-                  className="nav-link dropdown-toggle text-warning"
+                  className="nav-link dropdown-toggle"
                   href="#"
                   id="navbarDropdown"
                   role="button"
@@ -134,21 +134,21 @@ class NavBar extends Component {
                   برنامه ریزی
                 </a>
                 <ul
-                  className="dropdown-menu bg-dark"
+                  className="dropdown-menu bg-light"
                   aria-labelledby="navbarDropdown"
                 >
                   <li>
-                    <a className="dropdown-item text-warning" href="#">
+                    <a className="dropdown-item" href="#">
                       کارگزینی
                     </a>
                   </li>
                   <li>
-                    <a className="dropdown-item text-warning" href="#">
+                    <a className="dropdown-item" href="#">
                       حضور و غیاب
                     </a>
                   </li>
                   <li>
-                    <a className="dropdown-item text-warning" href="#">
+                    <a className="dropdown-item" href="#">
                       ارزشیابی
                     </a>
                   </li>
@@ -156,7 +156,7 @@ class NavBar extends Component {
               </li>
               <li className="nav-item dropdown">
                 <a
-                  className="nav-link dropdown-toggle text-warning"
+                  className="nav-link dropdown-toggle"
                   href="#"
                   id="navbarDropdown"
                   role="button"
@@ -166,21 +166,21 @@ class NavBar extends Component {
                   تخصصی
                 </a>
                 <ul
-                  className="dropdown-menu bg-dark"
+                  className="dropdown-menu bg-light"
                   aria-labelledby="navbarDropdown"
                 >
                   <li>
-                    <a className="dropdown-item text-warning" href="#">
+                    <a className="dropdown-item" href="#">
                       کارگزینی
                     </a>
                   </li>
                   <li>
-                    <a className="dropdown-item text-warning" href="#">
+                    <a className="dropdown-item" href="#">
                       حضور و غیاب
                     </a>
                   </li>
                   <li>
-                    <a className="dropdown-item text-warning" href="#">
+                    <a className="dropdown-item" href="#">
                       ارزشیابی
                     </a>
                   </li>

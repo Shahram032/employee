@@ -8,13 +8,13 @@ class Header extends Component {
   render() {
     return (
       <header>
-        <div className="px-3 py-2 bg-dark mt-1 mb-1 rounded">
+        <div className="px-3 py-2 bg-light mb-1 rounded shadow">
           <div className="container">
             <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
               <div className="dropdown text-end">
                 <a
                   href="#"
-                  className="d-block link-dark text-decoration-none dropdown-toggle text-info"
+                  className="d-block link-dark text-decoration-none dropdown-toggle text-dark"
                   data-bs-toggle="dropdown"
                   aria-expanded="true"
                 >
@@ -25,7 +25,7 @@ class Header extends Component {
                     width="32"
                     height="32"
                   />
-                  <label className="text-info me-2 fw-bold">شهرام آبائی</label>
+                  <label className="text-dark me-2 fw-bold">شهرام آبائی</label>
                 </a>
 
                 <ul
@@ -60,27 +60,27 @@ class Header extends Component {
               <ul className="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
                 <li>
                   <a href="#" className="nav-link text-secondary">
-                    {CustomIcon("FaBell", 25, "White")}
+                    {CustomIcon("FaBell", 25, "#511d5f")}
                   </a>
                 </li>
                 <li>
                   <a href="#" className="nav-link text-white">
-                    {CustomIcon("FaEnvelope", 25, "White")}
+                    {CustomIcon("FaEnvelope", 25, "#511d5f")}
                   </a>
                 </li>
                 <li>
                   <a href="#" className="nav-link text-white">
-                    {CustomIcon("FaClock", 25, "White")}
+                    {CustomIcon("FaClock", 25, "#511d5f")}
                   </a>
                 </li>
                 <li>
                   <a href="#" className="nav-link text-white">
-                    {CustomIcon("FaCogs", 25, "White")}
+                    {CustomIcon("FaCogs", 25, "#511d5f")}
                   </a>
                 </li>
                 <li>
                   <a href="#" className="nav-link text-white">
-                    {CustomIcon("FaPowerOff", 25, "White")}
+                    {CustomIcon("FaPowerOff", 25, "#511d5f")}
                   </a>
                 </li>
               </ul>
