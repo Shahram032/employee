@@ -8,7 +8,7 @@ class Header extends Component {
   render() {
     return (
       <header>
-        <div className="px-3 py-2 bg-light mb-1 rounded shadow">
+        <div className="px-3 py-2 bg-secondary mb-1 rounded shadow">
           <div className="container">
             <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
               <div className="dropdown text-end">
