@@ -9,20 +9,23 @@ import Menu from "./components/menu/menu";
 import NavBar from "./components/navbar/navbar";
 import Header from "./components/header/header";
 import Table from "./components/table/table";
+import Footer from "./components/footer/footer";
+import Top from "./components/stickytop/top";
+import Toolbar from "./components/toolbar/toolbar";
 
 document.getElementById("root").classList.add("container");
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.Fragment>
-    <br />
-    <br />
+    <Top />
     <Header />
     <NavBar />
     <div className="row m-1">
       <Menu />
       <Table />
     </div>
-    <Header />
+    <Toolbar />
+    <Footer />
   </React.Fragment>
 );
 

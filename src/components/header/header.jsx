@@ -2,14 +2,15 @@ import React, { Component } from "react";
 import "./header.css";
 import CustomIcon from "../menu/icons/customIcon";
 import logo from "../../assets/shah.jpg";
+import Lang from "../util/lang";
 
 class Header extends Component {
   state = {};
   render() {
     return (
       <header>
-        <div className="px-3 py-2 bg-secondary mb-1 rounded shadow">
-          <div className="container">
+        <div className="px-3 py-2 bg-muted mb-1 rounded shadow">
+          <div className="container btn-toolbar justify-content-between">
             <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
               <div className="dropdown text-end">
                 <a
@@ -85,6 +86,7 @@ class Header extends Component {
                 </li>
               </ul>
             </div>
+            <div>{Lang()}</div>
           </div>
         </div>
       </header>
