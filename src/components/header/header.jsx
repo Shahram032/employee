@@ -5,6 +5,11 @@ import logo from "../../assets/shah.jpg";
 import Lang from "../util/lang";
 
 class Header extends Component {
+  logout() {
+    sessionStorage.removeItem("token");
+    window.location.reload();
+  }
+
   state = {};
   render() {
     return (
@@ -80,7 +85,7 @@ class Header extends Component {
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="nav-link text-white">
+                  <a className="nav-link text-white" onClick={this.logout}>
                     {CustomIcon("FaPowerOff", 25, "#511d5f")}
                   </a>
                 </li>
