@@ -24,7 +24,12 @@ function App() {
   const token = getToken();
 
   if (!token) {
-    return <Login setToken={setToken} />;
+    return (
+      <div className="App">
+        Hello AppDividend
+        <Login />
+      </div>
+    );
   }
 
   return (
