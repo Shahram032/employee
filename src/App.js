@@ -1,7 +1,8 @@
 import React from "react";
 import "./App.css";
 import Login from "./components/login/login";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import Menu from "./components/menu/menu";
 import NavBar from "./components/navbar/navbar";
@@ -22,11 +23,12 @@ function getToken() {
 
 function App() {
   const token = getToken();
+  const notify = () => toast("Wow so easy!");
 
   if (!token) {
     return (
       <div className="App">
-        Hello AppDividend
+        <ToastContainer />
         <Login />
       </div>
     );
@@ -34,6 +36,7 @@ function App() {
 
   return (
     <React.Fragment>
+      <ToastContainer />
       <Top />
       <Header />
       <NavBar />

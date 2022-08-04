@@ -2,6 +2,7 @@ import React, { Component, useState } from "react";
 import axios from "axios";
 import key from "../../assets/svg/lock.svg";
 import "./login.css";
+import { toast } from "react-toastify";
 
 export default class Login extends Component {
   loginForm = { username: "", password: "" };
@@ -84,10 +85,16 @@ export default class Login extends Component {
           "token",
           response.data.data.passedUser.accessToken
         );
+        toast.success("Wellcome ");
+        setTimeout(2000);
         window.location.reload();
       })
       .catch((error) => {
         console.log(error);
+        this.setState({
+          loading: false,
+        });
+        toast.error(error.message);
       });
   };
 }
