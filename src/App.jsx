@@ -1,3 +1,33 @@
+import React, { Component } from "react";
+import Child from "./child";
+
+class Parent extends Component {
+  constructor(props) {
+    super(props);
+    this.setStateOfParent.bind(this);
+    this.state = { title: "Update me" };
+  }
+
+  // Creating below function to set state
+  // of this (parent) component.
+  setStateOfParent = (newTitle) => {
+    this.setState({ title: newTitle });
+  };
+
+  render() {
+    return (
+      <React.Fragment>
+        <h1> {this.state.title} </h1>
+        // Passing the setStateOfParent function // in child as a prop
+        <Child setStateOfParent={this.setStateOfParent} />
+      </React.Fragment>
+    );
+  }
+}
+
+export default Parent;
+
+/*
 import React from "react";
 import "./App.css";
 import Login from "./components/login/login";
@@ -51,3 +81,4 @@ function App() {
 }
 
 export default App;
+*/

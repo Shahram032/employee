@@ -4,13 +4,20 @@ import key from "../../assets/svg/lock.svg";
 import "./login.css";
 import { toast } from "react-toastify";
 
+function updateState(text) {
+  this.setState({ text });
+}
+
 export default class Login extends Component {
   loginForm = { username: "", password: "" };
+
   constructor(props) {
     super(props);
-    this.state = this.state = {
+    this.state = {
+      text: "Initial State",
       loading: false,
     };
+    updateState = updateState.bind(this);
   }
 
   render() {
@@ -27,6 +34,7 @@ export default class Login extends Component {
 
     return (
       <div dir="ltr">
+        <div>{this.state.text}</div>
         <form name="loginForm" className="form-login border rounded">
           <div className="d-flex justify-content-center">
             <img src={key} alt="" height="54" width="54" className="mb-4" />
@@ -85,9 +93,9 @@ export default class Login extends Component {
           "token",
           response.data.data.passedUser.accessToken
         );
-        toast.success("Wellcome ");
-        setTimeout(2000);
-        window.location.reload();
+        //toast.success("Wellcome ");
+        //setTimeout(2000);
+        //window.location.reload();
       })
       .catch((error) => {
         console.log(error);
