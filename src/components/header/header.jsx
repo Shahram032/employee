@@ -5,12 +5,10 @@ import logo from "../../assets/shah.jpg";
 import Lang from "../util/lang";
 
 class Header extends Component {
-  logout() {
-    sessionStorage.removeItem("token");
-    window.location.reload();
-  }
+  logout = () => {
+    this.props.logout();
+  };
 
-  state = {};
   render() {
     return (
       <header>
@@ -31,7 +29,11 @@ class Header extends Component {
                     width="32"
                     height="32"
                   />
-                  <label className="text-dark me-2 fw-bold">شهرام آبائی</label>
+                  <label className="text-dark me-2 fw-bold">
+                    {this.props.getUser().person.name +
+                      " " +
+                      this.props.getUser().person.family}
+                  </label>
                 </a>
 
                 <ul

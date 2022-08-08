@@ -3,7 +3,12 @@ import "./menu.css";
 import CustomIcon from "./icons/customIcon";
 
 class Menu extends Component {
-  state = {};
+  constructor(props) {
+    super(props);
+    this.state = {
+      loading: true,
+    };
+  }
 
   render() {
     return (

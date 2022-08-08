@@ -1,9 +1,79 @@
 import React, { Component } from "react";
 import "./navbar.css";
 import CustomIcon from "../menu/icons/customIcon";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 class NavBar extends Component {
-  state = {};
+  constructor(props) {
+    super(props);
+    this.state = {
+      loading: true,
+      mainMenus: [],
+    };
+  }
+
+  headers = {
+    "Content-Type": "application/json",
+    Authorization: "token " + this.props.getUser().accessToken,
+  };
+
+  componentDidMount() {
+    this.menus();
+  }
+
+  menus = async () => {
+    this.setState({
+      loading: true,
+    });
+    axios
+      .get(
+        "http://localhost:8080/api/tools/access/main_manu/" +
+          this.props.getUser().id,
+        { headers: this.headers }
+      )
+      .then((response) => {
+        this.setState({
+          loading: false,
+          mainMenus: response.data.data.mainMenus,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        this.setState({
+          loading: false,
+        });
+        toast.error(error.message);
+      });
+  };
+
+  ListItem = (props) => {
+    return (
+      <li className="nav-item dropdown">
+        <a
+          className="nav-link dropdown-toggle"
+          id="navbarDropdown"
+          role="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          {props.value}
+        </a>
+      </li>
+    );
+  };
+
+  MenuList = (props) => {
+    const menus = props.menus;
+    return (
+      <ul className="navbar-nav">
+        {menus.map((menu) => (
+          <this.ListItem key={menu.id.toString()} value={menu.caption} />
+        ))}
+      </ul>
+    );
+  };
+
   render() {
     return (
       <nav className="navbar navbar-expand-lg bg-light nav rounded shadow">
@@ -25,168 +95,7 @@ class NavBar extends Component {
             className="collapse navbar-collapse  justify-content-center"
             id="navbarSupportedContent"
           >
-            <ul className="navbar-nav">
-              <li className="nav-item dropdown">
-                <a
-                  className="nav-link dropdown-toggle"
-                  href="#"
-                  id="navbarDropdown"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  اداری
-                </a>
-                <ul
-                  className="dropdown-menu bg-light"
-                  aria-labelledby="navbarDropdown"
-                >
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      کارگزینی
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      حضور و غیاب
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      ارزشیابی
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li className="nav-item dropdown">
-                <a
-                  className="nav-link dropdown-toggle"
-                  href="#"
-                  id="navbarDropdown"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  مالی
-                </a>
-                <ul
-                  className="dropdown-menu bg-light"
-                  aria-labelledby="navbarDropdown"
-                >
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      کارگزینی
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      حضور و غیاب
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      ارزشیابی
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li className="nav-item dropdown">
-                <a
-                  className="nav-link dropdown-toggle"
-                  href="#"
-                  id="navbarDropdown"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  پشتیبانی
-                </a>
-                <ul
-                  className="dropdown-menu bg-light"
-                  aria-labelledby="navbarDropdown"
-                >
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      کارگزینی
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      حضور و غیاب
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      ارزشیابی
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li className="nav-item dropdown">
-                <a
-                  className="nav-link dropdown-toggle"
-                  href="#"
-                  id="navbarDropdown"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  برنامه ریزی
-                </a>
-                <ul
-                  className="dropdown-menu bg-light"
-                  aria-labelledby="navbarDropdown"
-                >
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      کارگزینی
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      حضور و غیاب
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      ارزشیابی
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li className="nav-item dropdown">
-                <a
-                  className="nav-link dropdown-toggle"
-                  href="#"
-                  id="navbarDropdown"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  تخصصی
-                </a>
-                <ul
-                  className="dropdown-menu bg-light"
-                  aria-labelledby="navbarDropdown"
-                >
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      کارگزینی
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      حضور و غیاب
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      ارزشیابی
-                    </a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
+            <this.MenuList menus={this.state.mainMenus} />
           </div>
         </div>
       </nav>
