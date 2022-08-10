@@ -2,11 +2,14 @@ import React, { Component } from "react";
 import "./header.css";
 import CustomIcon from "../menu/icons/customIcon";
 import logo from "../../assets/shah.jpg";
-import Lang from "../util/lang";
 
 class Header extends Component {
   logout = () => {
     this.props.logout();
+  };
+
+  changeLang = (event) => {
+    this.props.changeLang(event.target.value);
   };
 
   render() {
@@ -93,7 +96,19 @@ class Header extends Component {
                 </li>
               </ul>
             </div>
-            <div>{Lang()}</div>
+            <div>
+              <select
+                className="form-select lang"
+                aria-label="Default select example"
+                dir="ltr"
+                defaultValue={"fa"}
+                onChange={this.changeLang}
+              >
+                <option value={"fa"}>فارسی</option>
+                <option value={"ar"}>عربی</option>
+                <option value={"en"}>English</option>
+              </select>
+            </div>
           </div>
         </div>
       </header>

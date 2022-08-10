@@ -3,8 +3,11 @@ import "./navbar.css";
 import CustomIcon from "../menu/icons/customIcon";
 import axios from "axios";
 import { toast } from "react-toastify";
+import LangContext from "../language/lang";
+import Translate from "../language/translate";
 
 class NavBar extends Component {
+  static contextType = LangContext;
   constructor(props) {
     super(props);
     this.state = {
@@ -57,7 +60,7 @@ class NavBar extends Component {
           data-bs-toggle="dropdown"
           aria-expanded="false"
         >
-          {props.value}
+          <Translate>{props.value}</Translate>
         </a>
       </li>
     );
@@ -75,6 +78,8 @@ class NavBar extends Component {
   };
 
   render() {
+    const lang = this.context;
+    console.log("Lang in navbar : (" + lang + ")");
     return (
       <nav className="navbar navbar-expand-lg bg-light nav rounded shadow">
         <div className="container-fluid">
