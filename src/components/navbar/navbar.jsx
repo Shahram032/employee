@@ -62,8 +62,26 @@ class NavBar extends Component {
         >
           <Translate>{props.value}</Translate>
         </a>
+        <this.subMenu sub={props.sub}></this.subMenu>
       </li>
     );
+  };
+
+  subMenu = (props) => {
+    const sub = props.sub;
+    if (sub.length > 0)
+      return (
+        <ul className="dropdown-menu">
+          {sub.map((sub) => (
+            <li>
+              <a class="dropdown-item" href="#">
+                <Translate>{sub.caption}</Translate>
+              </a>
+            </li>
+          ))}
+        </ul>
+      );
+    else return "";
   };
 
   MenuList = (props) => {
@@ -71,7 +89,11 @@ class NavBar extends Component {
     return (
       <ul className="navbar-nav">
         {menus.map((menu) => (
-          <this.ListItem key={menu.id.toString()} value={menu.caption} />
+          <this.ListItem
+            key={menu.id.toString()}
+            value={menu.caption}
+            sub={menu.subMenus}
+          />
         ))}
       </ul>
     );
