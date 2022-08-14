@@ -9,7 +9,7 @@ class Top extends Component {
       <nav className="navbar sticky-top navbar-light bg-light">
         <div className="container-fluid justify-content-center">
           <label className=" text-secondary fw-bold">
-            <Translate>Integrated Resource Management System</Translate>
+            <Translate>Integrated Management System</Translate>
           </label>
         </div>
       </nav>

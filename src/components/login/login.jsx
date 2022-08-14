@@ -3,6 +3,7 @@ import axios from "axios";
 import key from "../../assets/svg/lock.svg";
 import "./login.css";
 import { toast } from "react-toastify";
+import Translate from "../language/translate";
 
 class Login extends Component {
   loginForm = { username: "", password: "" };
@@ -34,7 +35,7 @@ class Login extends Component {
             <img src={key} alt="" height="54" width="54" className="mb-4" />
           </div>
           <h4 className="d-flex justify-content-center h4 mb-3 font-weight-normal text-primary">
-            Login To System
+            <Translate>Login To System</Translate>
           </h4>
           <input
             type="text"
@@ -57,7 +58,8 @@ class Login extends Component {
           />
           <div className="checkbox mb-3">
             <label>
-              <input type="checkbox" value="remember-me" /> Remember me
+              <input type="checkbox" value="remember-me" />
+              <Translate>Remember me</Translate>
             </label>
           </div>
           <button
@@ -66,7 +68,7 @@ class Login extends Component {
             onClick={this.click}
           >
             {spin}
-            Login
+            <Translate>Login</Translate>
           </button>
         </form>
       </div>
