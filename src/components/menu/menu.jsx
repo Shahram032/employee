@@ -3,6 +3,7 @@ import "./menu.css";
 import CustomIcon from "./icons/customIcon";
 import axios from "axios";
 import { toast } from "react-toastify";
+import Translate, { GetTranslate } from "../language/translate";
 
 class Menu extends Component {
   constructor(props) {
@@ -37,7 +38,7 @@ class Menu extends Component {
       .then((response) => {
         this.setState({
           loading: false,
-          mainMenus: response.data.data.mainMenus,
+          sysMenus: response.data.data.sysMenus,
         });
       })
       .catch((error) => {
@@ -50,13 +51,13 @@ class Menu extends Component {
   };
 
   render() {
-    //this.sysMenus();
     return (
       <div className="col col-3 menu-header flex-shrink-0 p-3 shadow rounded overflow-auto">
-        {this.getHeader("سامانه کارگزینی")}
-        {this.getMenu("اطلاعات پایه", "base")}
-        {this.getMenu("عملیات اصلی", "main")}
-        {this.getMenu("عملیات اصلی", "main")}
+        {this.getHeader(this.props.getSys() + " System")}
+        {this.getMenu("Basic Information", "1")}
+        {this.getMenu("Side Operations", "2")}
+        {this.getMenu("Main Operations", "3")}
+        {this.getMenu("Reports", "4")}
       </div>
     );
   }
@@ -65,7 +66,9 @@ class Menu extends Component {
     return (
       <a className="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
         {CustomIcon("FaUserAlt", 25, "Orange")}
-        <span className="fs-6 fw-bold m-2">{caption}</span>
+        <span className="fs-6 fw-bold m-2">
+          <Translate>{caption}</Translate>
+        </span>
       </a>
     );
   }
@@ -77,34 +80,43 @@ class Menu extends Component {
           <button
             className="btn btn-toggle align-items-center rounded collapsed"
             data-bs-toggle="collapse"
-            data-bs-target={"#" + cat}
+            data-bs-target={"#menu_" + cat}
             aria-expanded="false"
           >
-            <label className="me-1">{caption}</label>
+            <label className="me-1">
+              <Translate>{caption}</Translate>
+            </label>
           </button>
-          <div className="collapse" id={cat}>
+          <div className="collapse" id={"menu_" + cat}>
             <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-              <li>
-                <a href="#" className="link-dark rounded">
-                  موسسات آموزشی
-                </a>
-              </li>
-              <li>
-                <a href="#" className="link-dark rounded">
-                  رشته های تحصیلی
-                </a>
-              </li>
-              <li>
-                <a href="#" className="link-dark rounded">
-                  انواع بکارگیری
-                </a>
-              </li>
+              <this.subMenu cat={cat} />
             </ul>
           </div>
         </li>
       </ul>
     );
   }
+
+  subMenu = (props) => {
+    console.log(props.cat);
+    let sub = [];
+    for (var menu of this.state.sysMenus) {
+      if (menu.category === parseInt(props.cat)) sub.push(menu);
+    }
+    if (sub.length > 0)
+      return (
+        <>
+          {sub.map((sub) => (
+            <li>
+              <a href="#" className="link-dark rounded">
+                <Translate>{sub.entityName}</Translate>
+              </a>
+            </li>
+          ))}
+        </>
+      );
+    else return "";
+  };
 }
 
 export default Menu;

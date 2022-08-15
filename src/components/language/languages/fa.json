@@ -12,7 +12,21 @@
     "Login": "ورود",
     "Remember me": "من را به خاطر بسپار",
     "Network Error": "خطا در برقراری ارتباط با سرویس دهنده",
+    "Employment System":"سیستم کارگزینی",
     "Employee System":"سیستم کارگزینی",
     "Absent System": "سیستم حضورغیاب",
-    "Evaluation System": "سیستم ارزشیابی"
+    "Evaluation System": "سیستم ارزشیابی",
+    "Accounting System": "سیستم حسابداری",
+    "Payroll System": "سیستم حقوق و دستمزد",
+    "Basic Information": "اطلاعات پایه",
+    "Side Operations":"عملیات جانبی",
+    "Main Operations":"عملیات اصلی",
+    "Reports":"گزارشات",
+    "Academy":"موسسات آموزشی",
+    "StudyField":"رشته های تحصیلی",
+    "Spouse":"اطلاعات همسر",
+    "AcademicEducation":"سوابق تحصیلی",
+    "Child":"اطلاعات فرزندان",
+    "Parent":"اطلاعات والدین",
+    "Employee":"اطلاعات کارمند"
 }

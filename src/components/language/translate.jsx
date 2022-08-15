@@ -1,5 +1,23 @@
-import { Component } from "react";
+import { Component, useContext } from "react";
 import LangContext from "../language/lang";
+
+function GetTranslate(txt) {
+  let context = LangContext;
+  let lang = context._currentValue;
+  var data = tryRequire("./languages/" + lang + ".json");
+  if (data) {
+    if (data[txt]) return data[txt];
+    else return txt;
+  } else return txt;
+}
+
+function tryRequire(path) {
+  try {
+    return require(`${path}`);
+  } catch (err) {
+    return null;
+  }
+}
 
 class Translate extends Component {
   static contextType = LangContext;
@@ -21,6 +39,18 @@ class Translate extends Component {
       else return <label className="tr">{txt}</label>;
     } else return txt;
   }
+
+  getTranslate = () => {
+    const lang = this.context;
+    let txt = this.props.children;
+    var data = this.tryRequire("./languages/" + lang + ".json");
+    if (data) {
+      if (data[txt]) return data[txt];
+      else return { txt };
+    } else return txt;
+  };
 }
 
+//exports getTranslate();
 export default Translate;
+export { Translate, GetTranslate };

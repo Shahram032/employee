@@ -52,17 +52,18 @@ class NavBar extends Component {
 
   ListItem = (props) => {
     return (
-      <li className="nav-item dropdown">
+      <li className="nav-item dropdown" key={"main_li_" + props.menuId}>
         <a
+          key={"main_a_" + props.menuId}
           className="nav-link dropdown-toggle"
-          id="navbarDropdown"
+          id={"navbarDropdown" + props.menuId}
           role="button"
           data-bs-toggle="dropdown"
           aria-expanded="false"
         >
           <Translate>{props.value}</Translate>
         </a>
-        <this.subMenu sub={props.sub}></this.subMenu>
+        <this.subMenu sub={props.sub} mainMenu={props}></this.subMenu>
       </li>
     );
   };
@@ -71,10 +72,13 @@ class NavBar extends Component {
     const sub = props.sub;
     if (sub.length > 0)
       return (
-        <ul className="dropdown-menu">
+        <ul
+          className="dropdown-menu"
+          key={"main_menu_ul_" + props.mainMenu.menuId}
+        >
           {sub.map((sub) => (
             <li>
-              <a class="dropdown-item" href="#">
+              <a className="dropdown-item" href="#" id={"a_" + sub.id}>
                 <Translate>{sub.caption}</Translate>
               </a>
             </li>
@@ -90,7 +94,8 @@ class NavBar extends Component {
       <ul className="navbar-nav">
         {menus.map((menu) => (
           <this.ListItem
-            key={menu.id.toString()}
+            key={"menu_" + menu.id}
+            menuId={menu.id}
             value={menu.caption}
             sub={menu.subMenus}
           />
