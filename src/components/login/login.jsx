@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { Component } from "react";
 import axios from "axios";
 import key from "../../assets/svg/lock.svg";
 import "./login.css";
@@ -97,7 +97,7 @@ class Login extends Component {
         this.setState({
           loading: false,
         });
-        toast.error(error.message);
+        toast.error(<Translate>{error.message}</Translate>);
       });
   };
 }

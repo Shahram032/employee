@@ -10,5 +10,9 @@
     "Integrated Management System":"سامانه جامع مدیریت منابع",
     "Login To System": "ورود به سامانه",
     "Login": "ورود",
-    "Remember me": "من را به خاطر بسپار"
+    "Remember me": "من را به خاطر بسپار",
+    "Network Error": "خطا در برقراری ارتباط با سرویس دهنده",
+    "Employee System":"سیستم کارگزینی",
+    "Absent System": "سیستم حضورغیاب",
+    "Evaluation System": "سیستم ارزشیابی"
 }

@@ -1,16 +1,56 @@
 import React, { Component } from "react";
 import "./menu.css";
 import CustomIcon from "./icons/customIcon";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 class Menu extends Component {
   constructor(props) {
     super(props);
     this.state = {
       loading: true,
+      sysMenus: [],
     };
   }
 
+  headers = {
+    "Content-Type": "application/json",
+    Authorization: "token " + this.props.getUser().accessToken,
+  };
+
+  componentDidMount() {
+    this.sysMenus();
+  }
+
+  sysMenus = async () => {
+    this.setState({
+      loading: true,
+    });
+    axios
+      .get(
+        "http://localhost:8080/api/tools/access/sys_manu/" +
+          this.props.getUser().id +
+          "/" +
+          this.props.getSys(),
+        { headers: this.headers }
+      )
+      .then((response) => {
+        this.setState({
+          loading: false,
+          mainMenus: response.data.data.mainMenus,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        this.setState({
+          loading: false,
+        });
+        toast.error(error.message);
+      });
+  };
+
   render() {
+    //this.sysMenus();
     return (
       <div className="col col-3 menu-header flex-shrink-0 p-3 shadow rounded overflow-auto">
         {this.getHeader("سامانه کارگزینی")}

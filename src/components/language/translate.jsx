@@ -17,8 +17,8 @@ class Translate extends Component {
     let txt = this.props.children;
     var data = this.tryRequire("./languages/" + lang + ".json");
     if (data) {
-      if (data[txt]) return data[txt];
-      else return txt;
+      if (data[txt]) return <label className="tr">{data[txt]}</label>;
+      else return <label className="tr">{txt}</label>;
     } else return txt;
   }
 }

@@ -7,9 +7,10 @@ import Table from "./components/table/table";
 import Footer from "./components/footer/footer";
 import Top from "./components/stickytop/top";
 import Toolbar from "./components/toolbar/toolbar";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LangContext from "./components/language/lang";
+import "./App.css";
 
 class App extends Component {
   constructor(props) {
@@ -19,7 +20,9 @@ class App extends Component {
     this.getUser.bind(this);
     this.logout.bind(this);
     this.changeLang.bind(this);
-    this.state = { title: "Update me", lang: "fa" };
+    this.setSys.bind(this);
+    this.getSys.bind(this);
+    this.state = { title: "Update me", lang: "fa", sys: "Employment" };
   }
 
   changeLang = (lang) => {
@@ -40,6 +43,14 @@ class App extends Component {
   getUser = () => {
     let user = JSON.parse(localStorage.getItem("user"));
     return user;
+  };
+
+  setSys = (sys) => {
+    this.setState({ sys: sys });
+  };
+
+  getSys = () => {
+    return this.state.sys;
   };
 
   logout = () => {
@@ -68,7 +79,7 @@ class App extends Component {
             />
             <NavBar getUser={this.getUser} />
             <div className="row m-1">
-              <Menu getUser={this.getUser} />
+              <Menu getUser={this.getUser} getSys={this.getSys} />
               <Table />
             </div>
             <Toolbar />
