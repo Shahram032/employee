@@ -77,7 +77,7 @@ class NavBar extends Component {
           key={"main_menu_ul_" + props.mainMenu.menuId}
         >
           {sub.map((sub) => (
-            <li>
+            <li key={sub.id}>
               <a className="dropdown-item" href="#" id={"a_" + sub.id}>
                 <Translate>{sub.caption}</Translate>
               </a>
@@ -105,8 +105,6 @@ class NavBar extends Component {
   };
 
   render() {
-    const lang = this.context;
-    console.log("Lang in navbar : (" + lang + ")");
     return (
       <nav className="navbar navbar-expand-lg bg-light nav rounded shadow">
         <div className="container-fluid">

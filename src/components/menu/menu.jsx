@@ -4,8 +4,10 @@ import CustomIcon from "./icons/customIcon";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Translate, { GetTranslate } from "../language/translate";
+import LangContext from "../language/lang";
 
 class Menu extends Component {
+  static contextType = LangContext;
   constructor(props) {
     super(props);
     this.state = {
@@ -24,12 +26,14 @@ class Menu extends Component {
   }
 
   sysMenus = async () => {
+    const baseUrl = this.context.baseUrl;
     this.setState({
       loading: true,
     });
     axios
       .get(
-        "http://localhost:8080/api/tools/access/sys_manu/" +
+        baseUrl +
+          "tools/access/sys_manu/" +
           this.props.getUser().id +
           "/" +
           this.props.getSys(),
@@ -98,7 +102,6 @@ class Menu extends Component {
   }
 
   subMenu = (props) => {
-    console.log(props.cat);
     let sub = [];
     for (var menu of this.state.sysMenus) {
       if (menu.category === parseInt(props.cat)) sub.push(menu);
@@ -107,8 +110,11 @@ class Menu extends Component {
       return (
         <>
           {sub.map((sub) => (
-            <li>
-              <a href="#" className="link-dark rounded">
+            <li key={sub.id}>
+              <a
+                href={this.context.baseUrl + sub.entityName}
+                className="link-dark rounded"
+              >
                 <Translate>{sub.entityName}</Translate>
               </a>
             </li>

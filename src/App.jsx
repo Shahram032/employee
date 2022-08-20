@@ -11,6 +11,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LangContext from "./components/language/lang";
 import "./App.css";
+import Dashboard from "./components/dashboard/dashboard";
 
 class App extends Component {
   constructor(props) {
@@ -22,7 +23,12 @@ class App extends Component {
     this.changeLang.bind(this);
     this.setSys.bind(this);
     this.getSys.bind(this);
-    this.state = { title: "Update me", lang: "fa", sys: "Employment" };
+    this.state = {
+      lang: "fa",
+      sys: "dashboard",
+      baseUrl: "http://localhost:8080/api/",
+      content: "dashboard",
+    };
   }
 
   changeLang = (lang) => {
@@ -58,6 +64,22 @@ class App extends Component {
     this.setState({});
   };
 
+  getContent = () => {
+    if (this.state.sys == "dashboard" && this.state.content == "dashboard")
+      return (
+        <div className="row m-1">
+          <Dashboard />
+        </div>
+      );
+    else
+      return (
+        <div className="row m-1">
+          <Menu getUser={this.getUser} getSys={this.getSys} />
+          <Table />
+        </div>
+      );
+  };
+
   render() {
     if (!this.getUser())
       return (
@@ -69,7 +91,7 @@ class App extends Component {
     if (this.getUser())
       return (
         <React.Fragment>
-          <LangContext.Provider value={this.state.lang}>
+          <LangContext.Provider value={this.state}>
             <ToastContainer />
             <Top />
             <Header
@@ -78,10 +100,7 @@ class App extends Component {
               getUser={this.getUser}
             />
             <NavBar getUser={this.getUser} />
-            <div className="row m-1">
-              <Menu getUser={this.getUser} getSys={this.getSys} />
-              <Table />
-            </div>
+            {this.getContent()}
             <Toolbar />
             <Footer />
           </LangContext.Provider>

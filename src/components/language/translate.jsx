@@ -31,7 +31,7 @@ class Translate extends Component {
   };
 
   render() {
-    const lang = this.context;
+    const lang = this.context.lang;
     let txt = this.props.children;
     var data = this.tryRequire("./languages/" + lang + ".json");
     if (data) {
@@ -51,6 +51,5 @@ class Translate extends Component {
   };
 }
 
-//exports getTranslate();
 export default Translate;
 export { Translate, GetTranslate };
