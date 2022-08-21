@@ -22,12 +22,13 @@ class App extends Component {
     this.logout.bind(this);
     this.changeLang.bind(this);
     this.setSys.bind(this);
+    this.setContent.bind(this);
     this.getSys.bind(this);
     this.state = {
       lang: "fa",
       sys: "dashboard",
-      baseUrl: "http://localhost:8080/api/",
       content: "dashboard",
+      baseUrl: "http://localhost:8080/api/",
     };
   }
 
@@ -52,7 +53,11 @@ class App extends Component {
   };
 
   setSys = (sys) => {
-    this.setState({ sys: sys });
+    this.setState({ sys: sys, content: "dashboard" });
+  };
+
+  setContent = (content) => {
+    this.setState({ content: content });
   };
 
   getSys = () => {
@@ -71,10 +76,24 @@ class App extends Component {
           <Dashboard />
         </div>
       );
+    else if (this.state.sys != "dashboard" && this.state.content == "dashboard")
+      return (
+        <div className="row m-1">
+          <Menu
+            getUser={this.getUser}
+            getSys={this.getSys}
+            setContent={this.setContent}
+          />
+        </div>
+      );
     else
       return (
         <div className="row m-1">
-          <Menu getUser={this.getUser} getSys={this.getSys} />
+          <Menu
+            getUser={this.getUser}
+            getSys={this.getSys}
+            setContent={this.setContent}
+          />
           <Table />
         </div>
       );
@@ -99,7 +118,7 @@ class App extends Component {
               logout={this.logout}
               getUser={this.getUser}
             />
-            <NavBar getUser={this.getUser} />
+            <NavBar getUser={this.getUser} setSys={this.setSys} />
             {this.getContent()}
             <Toolbar />
             <Footer />

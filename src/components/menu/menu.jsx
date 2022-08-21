@@ -13,6 +13,7 @@ class Menu extends Component {
     this.state = {
       loading: true,
       sysMenus: [],
+      sys: "",
     };
   }
 
@@ -55,6 +56,10 @@ class Menu extends Component {
   };
 
   render() {
+    if (this.state.sys != this.props.getSys()) {
+      this.sysMenus();
+      this.state.sys = this.props.getSys();
+    }
     return (
       <div className="col col-3 menu-header flex-shrink-0 p-3 shadow rounded overflow-auto">
         {this.getHeader(this.props.getSys() + " System")}
@@ -101,6 +106,10 @@ class Menu extends Component {
     );
   }
 
+  setContent = (content) => {
+    this.props.setContent(content);
+  };
+
   subMenu = (props) => {
     let sub = [];
     for (var menu of this.state.sysMenus) {
@@ -112,10 +121,12 @@ class Menu extends Component {
           {sub.map((sub) => (
             <li key={sub.id}>
               <a
-                href={this.context.baseUrl + sub.entityName}
                 className="link-dark rounded"
+                onClick={() => this.setContent(sub.entityName)}
               >
-                <Translate>{sub.entityName}</Translate>
+                <Translate onClick={() => this.setContent(sub.entityName)}>
+                  {sub.entityName}
+                </Translate>
               </a>
             </li>
           ))}

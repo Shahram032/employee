@@ -26,15 +26,14 @@ class NavBar extends Component {
   }
 
   menus = async () => {
+    const baseUrl = this.context.baseUrl;
     this.setState({
       loading: true,
     });
     axios
-      .get(
-        "http://localhost:8080/api/tools/access/main_manu/" +
-          this.props.getUser().id,
-        { headers: this.headers }
-      )
+      .get(baseUrl + "tools/access/main_manu/" + this.props.getUser().id, {
+        headers: this.headers,
+      })
       .then((response) => {
         this.setState({
           loading: false,
@@ -78,7 +77,12 @@ class NavBar extends Component {
         >
           {sub.map((sub) => (
             <li key={sub.id}>
-              <a className="dropdown-item" href="#" id={"a_" + sub.id}>
+              <a
+                className="dropdown-item"
+                href="#"
+                id={"a_" + sub.id}
+                onClick={() => this.setSys(sub.subSystem)}
+              >
                 <Translate>{sub.caption}</Translate>
               </a>
             </li>
@@ -86,6 +90,10 @@ class NavBar extends Component {
         </ul>
       );
     else return "";
+  };
+
+  setSys = (sys) => {
+    this.props.setSys(sys);
   };
 
   MenuList = (props) => {
