@@ -24,11 +24,14 @@ class App extends Component {
     this.setSys.bind(this);
     this.setContent.bind(this);
     this.getSys.bind(this);
+    this.setSystems.bind(this);
+    this.getSysIcon.bind(this);
     this.state = {
       lang: "fa",
       sys: "dashboard",
       content: "dashboard",
       baseUrl: "http://localhost:8080/api/",
+      systems: [],
     };
   }
 
@@ -54,6 +57,22 @@ class App extends Component {
 
   setSys = (sys) => {
     this.setState({ sys: sys, content: "dashboard" });
+  };
+
+  setSystems = (systems) => {
+    let tmp = [];
+    this.state.systems = [];
+    for (var item of systems) {
+      for (var sub of item.subMenus) {
+        tmp[sub.subSystem] = sub.icon;
+      }
+    }
+    this.setState({ systems: tmp });
+  };
+
+  getSysIcon = (sys) => {
+    let icon = this.state.systems[sys];
+    return icon;
   };
 
   setContent = (content) => {
@@ -83,6 +102,7 @@ class App extends Component {
             getUser={this.getUser}
             getSys={this.getSys}
             setContent={this.setContent}
+            getSysIcon={this.getSysIcon}
           />
         </div>
       );
@@ -93,6 +113,7 @@ class App extends Component {
             getUser={this.getUser}
             getSys={this.getSys}
             setContent={this.setContent}
+            getSysIcon={this.getSysIcon}
           />
           <Table />
         </div>
@@ -118,7 +139,11 @@ class App extends Component {
               logout={this.logout}
               getUser={this.getUser}
             />
-            <NavBar getUser={this.getUser} setSys={this.setSys} />
+            <NavBar
+              getUser={this.getUser}
+              setSys={this.setSys}
+              setSystems={this.setSystems}
+            />
             {this.getContent()}
             <Toolbar />
             <Footer />

@@ -5,7 +5,7 @@ class Table extends Component {
   state = {};
   render() {
     return (
-      <div className="col col-9 rounded m-1 me-4 p-3 table-responsive shadow">
+      <div className="col col-9 rounded p-3 table-responsive shadow">
         <table className="table table-sm caption-top">
           <caption className="text-center text-dark fw-bold">
             لیست پرسنل

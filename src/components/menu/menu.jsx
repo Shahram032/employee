@@ -23,14 +23,14 @@ class Menu extends Component {
   };
 
   componentDidMount() {
+    this.setState({
+      loading: true,
+    });
     this.sysMenus();
   }
 
   sysMenus = async () => {
     const baseUrl = this.context.baseUrl;
-    this.setState({
-      loading: true,
-    });
     axios
       .get(
         baseUrl +
@@ -50,6 +50,7 @@ class Menu extends Component {
         console.log(error);
         this.setState({
           loading: false,
+          sysMenus: [],
         });
         toast.error(error.message);
       });
@@ -72,9 +73,11 @@ class Menu extends Component {
   }
 
   getHeader(caption) {
+    let sys = caption.replace(" System", "");
+    let icon = this.props.getSysIcon(sys);
     return (
       <a className="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
-        {CustomIcon("FaUserAlt", 25, "Orange")}
+        {CustomIcon(icon, 25, "Orange")}
         <span className="fs-6 fw-bold m-2">
           <Translate>{caption}</Translate>
         </span>

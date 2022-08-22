@@ -39,6 +39,7 @@ class NavBar extends Component {
           loading: false,
           mainMenus: response.data.data.mainMenus,
         });
+        this.props.setSystems(response.data.data.mainMenus);
       })
       .catch((error) => {
         console.log(error);
@@ -113,30 +114,65 @@ class NavBar extends Component {
   };
 
   render() {
-    return (
-      <nav className="navbar navbar-expand-lg bg-light nav rounded shadow">
-        <div className="container-fluid">
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon">
-              {CustomIcon("FaBars", 25, "Orange")}
-            </span>
-          </button>
-          <div
-            className="collapse navbar-collapse  justify-content-center"
-            id="navbarSupportedContent"
-          >
-            <this.MenuList menus={this.state.mainMenus} />
-          </div>
+    if (this.state.loading)
+      return (
+        <div>
+          <nav className="navbar navbar-expand-lg bg-light nav rounded shadow">
+            <div className="container-fluid">
+              <button
+                className="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
+                <span className="navbar-toggler-icon">
+                  {CustomIcon("FaBars", 25, "Orange")}
+                </span>
+              </button>
+              <div
+                className="collapse navbar-collapse  justify-content-center"
+                id="navbarSupportedContent"
+              >
+                <span
+                  className="spinner-border spinner-border-sm"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
+              </div>
+            </div>
+          </nav>
         </div>
-      </nav>
+      );
+
+    return (
+      <div>
+        <nav className="navbar navbar-expand-lg bg-light nav rounded shadow">
+          <div className="container-fluid">
+            <button
+              className="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span className="navbar-toggler-icon">
+                {CustomIcon("FaBars", 25, "Orange")}
+              </span>
+            </button>
+            <div
+              className="collapse navbar-collapse  justify-content-center"
+              id="navbarSupportedContent"
+            >
+              <this.MenuList menus={this.state.mainMenus} />
+            </div>
+          </div>
+        </nav>
+      </div>
     );
   }
 }
