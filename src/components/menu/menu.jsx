@@ -109,10 +109,6 @@ class Menu extends Component {
     );
   }
 
-  setContent = (content) => {
-    this.props.setContent(content);
-  };
-
   subMenu = (props) => {
     let sub = [];
     for (var menu of this.state.sysMenus) {
@@ -125,9 +121,11 @@ class Menu extends Component {
             <li key={sub.id}>
               <a
                 className="link-dark rounded"
-                onClick={() => this.setContent(sub.entityName)}
+                onClick={() => this.props.setContent(sub.entityName)}
               >
-                <Translate onClick={() => this.setContent(sub.entityName)}>
+                <Translate
+                  onClick={() => this.props.setContent(sub.entityName)}
+                >
                   {sub.entityName}
                 </Translate>
               </a>
