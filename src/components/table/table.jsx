@@ -13,6 +13,8 @@ class Table extends Component {
     this.state = {
       loading: true,
       content: "",
+      keys: [],
+      data: [{}],
     };
   }
 
@@ -44,9 +46,14 @@ class Table extends Component {
         }
       )
       .then((response) => {
+        let object = response.data.data[Object.keys(response.data.data)[0]];
+        let keys = Object.keys(object.content[0]);
+        //console.log(object.content);
+        //console.log(keys);
         this.setState({
           loading: false,
-          sysMenus: response.data.data.sysMenus,
+          keys: keys,
+          data: object.content,
         });
       })
       .catch((error) => {
@@ -68,99 +75,25 @@ class Table extends Component {
       <div className="col col-9 rounded p-3 table-responsive shadow">
         <table className="table table-sm caption-top">
           <caption className="text-center text-dark fw-bold">
-            {this.getContentUrl(this.context.content)}
+            <Translate>{this.context.content}</Translate>
           </caption>
           <thead>
             <tr>
-              <th scope="col">ردیف</th>
-              <th scope="col">نام</th>
-              <th scope="col">نام خانوادگی</th>
-              <th scope="col">حساب</th>
-              <th scope="col">ردیف</th>
-              <th scope="col">نام</th>
-              <th scope="col">نام خانوادگی</th>
-              <th scope="col">حساب</th>
-              <th scope="col">نام</th>
-              <th scope="col">نام خانوادگی</th>
-              <th scope="col">حساب</th>
-              <th scope="col">ردیف</th>
-              <th scope="col">نام</th>
-              <th scope="col">نام خانوادگی</th>
-              <th scope="col">حساب</th>
+              {this.state.keys.map((k) => (
+                <th>
+                  <Translate>{k}</Translate>
+                </th>
+              ))}
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-              <td>Mark</td>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-              <td>Mark</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Larry</td>
-              <td>the Bird</td>
-              <td>@twitter</td>
-            </tr>
-            <tr>
-              <th scope="row">4</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
-            <tr>
-              <th scope="row">5</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-            </tr>
-            <tr>
-              <th scope="row">6</th>
-              <td>Larry</td>
-              <td>the Bird</td>
-              <td>@twitter</td>
-            </tr>
-            <tr>
-              <th scope="row">7</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
-            <tr>
-              <th scope="row">8</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-            </tr>
-            <tr>
-              <th scope="row">9</th>
-              <td>Larry</td>
-              <td>the Bird</td>
-              <td>@twitter</td>
-            </tr>
-            <tr>
-              <th scope="row">10</th>
-              <td>Larry</td>
-              <td>the Bird</td>
-              <td>@twitter</td>
-            </tr>
+            {this.state.data.map((k) => (
+              <tr>
+                {this.state.keys.map((d) => (
+                  <th>{k[d]}</th>
+                ))}
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

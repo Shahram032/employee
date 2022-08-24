@@ -45,6 +45,7 @@ class Menu extends Component {
           loading: false,
           sysMenus: response.data.data.sysMenus,
         });
+        console.log(response.data.data.sysMenus);
       })
       .catch((error) => {
         console.log(error);
