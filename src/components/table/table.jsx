@@ -15,6 +15,7 @@ class Table extends Component {
       content: "",
       keys: [],
       data: [{}],
+      selectedRecord: {},
     };
   }
 
@@ -36,7 +37,31 @@ class Table extends Component {
     return res;
   };
 
+  selectRow = (record) => {
+    this.setState({ selectedRecord: record });
+    const collection = document.getElementsByClassName("selectedRow");
+    for (let i = 0; i < collection.length; i++) {
+      collection[i].classList.remove("selectedRow");
+    }
+    document.getElementById("rw_" + record.id).classList.add("selectedRow");
+  };
+
+  selectCol = (col) => {
+    if (document.getElementById("col_" + col).classList.contains("selectedCol"))
+      document.getElementById("col_" + col).classList.remove("selectedCol");
+    else document.getElementById("col_" + col).classList.add("selectedCol");
+  };
+
+  deSelectRow = () => {
+    this.state.selectedRecord = {};
+    const collection = document.getElementsByClassName("selectedRow");
+    for (let i = 0; i < collection.length; i++) {
+      collection[i].classList.remove("selectedRow");
+    }
+  };
+
   getContent = async () => {
+    this.deSelectRow();
     const baseUrl = this.context.baseUrl;
     axios
       .get(
@@ -47,9 +72,8 @@ class Table extends Component {
       )
       .then((response) => {
         let object = response.data.data[Object.keys(response.data.data)[0]];
-        let keys = Object.keys(object.content[0]);
-        //console.log(object.content);
-        //console.log(keys);
+        let keys = [];
+        if (object.content.length > 0) keys = Object.keys(object.content[0]);
         this.setState({
           loading: false,
           keys: keys,
@@ -60,7 +84,7 @@ class Table extends Component {
         console.log(error);
         this.setState({
           loading: false,
-          sysMenus: [],
+          data: [],
         });
         toast.error(error.message);
       });
@@ -78,19 +102,28 @@ class Table extends Component {
             <Translate>{this.context.content}</Translate>
           </caption>
           <thead>
-            <tr>
+            <tr className="border-bt border-dark">
+              <th>
+                <Translate>Serial</Translate>
+              </th>
               {this.state.keys.map((k) => (
-                <th>
+                <th key={k} id={"col_" + k} onClick={() => this.selectCol(k)}>
                   <Translate>{k}</Translate>
                 </th>
               ))}
             </tr>
           </thead>
           <tbody>
-            {this.state.data.map((k) => (
-              <tr>
+            {this.state.data.map((k, index) => (
+              <tr
+                className={"tableRow"}
+                onClick={() => this.selectRow(k)}
+                key={"rw_" + k.id}
+                id={"rw_" + k.id}
+              >
+                <td>{++index}</td>
                 {this.state.keys.map((d) => (
-                  <th>{k[d]}</th>
+                  <td key={"td_" + d + "_" + k.id}>{k[d]}</td>
                 ))}
               </tr>
             ))}

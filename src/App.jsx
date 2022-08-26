@@ -40,7 +40,7 @@ class App extends Component {
   }
 
   changeLang = (lang) => {
-    console.log(lang);
+    //console.log(lang);
     this.setState({ lang: lang });
   };
 
@@ -50,7 +50,13 @@ class App extends Component {
   };
 
   setUser = (user) => {
-    this.setState({ user: user });
+    this.setState({
+      user: user,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "token " + user.accessToken,
+      },
+    });
     localStorage.setItem("user", JSON.stringify(user));
   };
 
@@ -147,6 +153,7 @@ class App extends Component {
               getUser={this.getUser}
               setSys={this.setSys}
               setSystems={this.setSystems}
+              logout={this.logout}
             />
             {this.getContent()}
             <Toolbar />

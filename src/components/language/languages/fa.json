@@ -1,4 +1,5 @@
 {
+    "Serial":"ردیف",
     "Hello world": "سلام جهان",
     "Homepage": "خانه",
     "Official": "اداری",
@@ -32,5 +33,6 @@
     "id": "شناسه",
     "title": "عنوان",
     "phoneNo": "شماره تلفن",
-    "address": "نشانی"
+    "address": "نشانی",
+    "The Token has expired on": "توکن ارسالی منقضی شده است. تاریخ پایان اعتبار : "
 }

@@ -4,7 +4,7 @@ import CustomIcon from "../menu/icons/customIcon";
 import axios from "axios";
 import { toast } from "react-toastify";
 import LangContext from "../language/lang";
-import Translate from "../language/translate";
+import Translate, { GetTranslate } from "../language/translate";
 
 class NavBar extends Component {
   static contextType = LangContext;
@@ -42,11 +42,19 @@ class NavBar extends Component {
         this.props.setSystems(response.data.data.mainMenus);
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error.response.data.error_message);
         this.setState({
           loading: false,
         });
-        toast.error(error.message);
+        let err = error.response.data.error_message;
+        if (err.startsWith("The Token has expired on")) {
+          err =
+            GetTranslate("The Token has expired on") +
+            err.replace("The Token has expired on", "");
+          toast.error(<Translate>{err}</Translate>);
+          this.props.logout();
+        }
+        toast.error(<Translate>{err}</Translate>);
       });
   };
 

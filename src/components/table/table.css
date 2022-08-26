@@ -6,3 +6,15 @@
 .td {
   font-size: 5px;
 }
+
+.tableRow {
+  cursor: pointer;
+}
+
+.selectedRow {
+  background-color: rgb(172, 248, 223);
+}
+
+.selectedCol {
+  background-color: rgb(165, 159, 212) !important;
+}
