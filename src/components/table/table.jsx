@@ -4,6 +4,7 @@ import "./table.css";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Translate, { GetTranslate } from "../language/translate";
+import CustomIcon from "../menu/icons/customIcon";
 
 class Table extends Component {
   static contextType = LangContext;
@@ -15,6 +16,7 @@ class Table extends Component {
       content: "",
       keys: [],
       data: [{}],
+      srt: {},
       selectedRecord: {},
     };
   }
@@ -47,9 +49,18 @@ class Table extends Component {
   };
 
   selectCol = (col) => {
-    if (document.getElementById("col_" + col).classList.contains("selectedCol"))
-      document.getElementById("col_" + col).classList.remove("selectedCol");
-    else document.getElementById("col_" + col).classList.add("selectedCol");
+    //if (document.getElementById("col_" + col).classList.contains("selectedCol"))
+    //  document.getElementById("col_" + col).classList.remove("selectedCol");
+    //else document.getElementById("col_" + col).classList.add("selectedCol");
+    let tmp = this.state.srt;
+    if (!tmp[col]) {
+      tmp[col] = { order: "asc" };
+    } else {
+      if (tmp[col].order === "asc") tmp[col] = { order: "desc" };
+      else delete tmp[col];
+    }
+
+    this.setState({ srt: tmp });
   };
 
   deSelectRow = () => {
@@ -90,6 +101,15 @@ class Table extends Component {
       });
   };
 
+  getSrt = (col) => {
+    let tmp = this.state.srt[col];
+    if (tmp) {
+      if (tmp.order === "asc") return CustomIcon("FaArrowUp", 12, "Green");
+      else return CustomIcon("FaArrowDown", 12, "Red");
+    }
+    return <></>;
+  };
+
   render() {
     if (this.state.content != this.context.content) {
       this.getContent();
@@ -108,7 +128,12 @@ class Table extends Component {
               </th>
               {this.state.keys.map((k) => (
                 <th key={k} id={"col_" + k} onClick={() => this.selectCol(k)}>
-                  <Translate>{k}</Translate>
+                  <div className="d-flex">
+                    <span className="me-1">
+                      <Translate>{k}</Translate>
+                    </span>
+                    <span> {this.getSrt(k)} </span>
+                  </div>
                 </th>
               ))}
             </tr>
