@@ -17,6 +17,7 @@ class Table extends Component {
       keys: [],
       data: [{}],
       srt: {},
+      filter: "id",
       selectedRecord: {},
     };
   }
@@ -27,6 +28,10 @@ class Table extends Component {
     });
     this.getContent();
   }
+
+  resetFilter = () => {
+    this.setState({ filter: "id" });
+  };
 
   getContentUrl = (content) => {
     let res = "";
@@ -48,10 +53,13 @@ class Table extends Component {
     document.getElementById("rw_" + record.id).classList.add("selectedRow");
   };
 
-  selectCol = (col) => {
-    //if (document.getElementById("col_" + col).classList.contains("selectedCol"))
-    //  document.getElementById("col_" + col).classList.remove("selectedCol");
-    //else document.getElementById("col_" + col).classList.add("selectedCol");
+  selectCol = (event) => {
+    event.stopPropagation();
+    let col = event.currentTarget.id.replace("col_", "");
+    if (event.ctrlKey) {
+      this.setState({ filter: col });
+      return;
+    }
     let tmp = this.state.srt;
     if (!tmp[col]) {
       tmp[col] = { order: "asc" };
@@ -73,6 +81,8 @@ class Table extends Component {
 
   getContent = async () => {
     this.deSelectRow();
+    this.state.srt = {};
+    this.state.filter = "id";
     const baseUrl = this.context.baseUrl;
     axios
       .get(
@@ -101,13 +111,34 @@ class Table extends Component {
       });
   };
 
-  getSrt = (col) => {
+  getSrtFlt = (col) => {
+    let filterColor = "white";
+    if (this.state.filter === col) {
+      filterColor = "blue";
+    }
     let tmp = this.state.srt[col];
     if (tmp) {
-      if (tmp.order === "asc") return CustomIcon("FaArrowUp", 12, "Green");
-      else return CustomIcon("FaArrowDown", 12, "Red");
+      if (tmp.order === "asc")
+        return (
+          <div className="d-flex">
+            {CustomIcon("FaFilter", 12, filterColor)}
+            {CustomIcon("FaArrowUp", 12, "Green")}
+          </div>
+        );
+      else
+        return (
+          <div className="d-flex">
+            {CustomIcon("FaFilter", 12, filterColor)}
+            {CustomIcon("FaArrowDown", 12, "Red")}
+          </div>
+        );
     }
-    return <></>;
+    return (
+      <div className="d-flex">
+        {CustomIcon("FaFilter", 12, filterColor)}
+        {CustomIcon("FaArrowUp", 12, "white")}
+      </div>
+    );
   };
 
   render() {
@@ -117,22 +148,50 @@ class Table extends Component {
     }
     return (
       <div className="col col-9 rounded p-3 table-responsive shadow">
-        <table className="table table-sm caption-top">
-          <caption className="text-center text-dark fw-bold">
+        <div className="d-flex justify-content-between" role="search">
+          <div className="text-end text-dark fw-bold">
             <Translate>{this.context.content}</Translate>
-          </caption>
+          </div>
+          <form className="d-flex" role="search">
+            <button
+              className="btn btn-sm btn-outline-success mb-2"
+              type="button"
+            >
+              <Translate>Search</Translate>
+            </button>
+            <input
+              className="form-control form-control-sm me-2 ms-2 mb-2"
+              type="search"
+              placeholder={GetTranslate(this.state.filter)}
+              aria-label="Search"
+            />
+            <button
+              className="btn btn-sm btn-outline-danger mb-2"
+              type="button"
+              onClick={this.resetFilter}
+            >
+              {CustomIcon("FaTimes", 12, "")}
+            </button>
+          </form>
+        </div>
+        <table className="table table-sm caption-top">
           <thead>
             <tr className="border-bt border-dark">
-              <th>
+              <th className="prevent-select">
                 <Translate>Serial</Translate>
               </th>
               {this.state.keys.map((k) => (
-                <th key={k} id={"col_" + k} onClick={() => this.selectCol(k)}>
+                <th
+                  key={k}
+                  id={"col_" + k}
+                  onClick={this.selectCol}
+                  className="prevent-select"
+                >
                   <div className="d-flex">
-                    <span className="me-1">
+                    <div>
                       <Translate>{k}</Translate>
-                    </span>
-                    <span> {this.getSrt(k)} </span>
+                    </div>
+                    <div> {this.getSrtFlt(k)} </div>
                   </div>
                 </th>
               ))}

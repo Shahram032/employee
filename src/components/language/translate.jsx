@@ -3,7 +3,7 @@ import LangContext from "../language/lang";
 
 function GetTranslate(txt) {
   let context = LangContext;
-  let lang = context._currentValue;
+  let lang = context._currentValue.lang;
   var data = tryRequire("./languages/" + lang + ".json");
   if (data) {
     if (data[txt]) return data[txt];

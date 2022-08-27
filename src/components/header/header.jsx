@@ -9,6 +9,7 @@ class Header extends Component {
   };
 
   changeLang = (event) => {
+    console.log(event);
     this.props.changeLang(event.target.value);
   };
 

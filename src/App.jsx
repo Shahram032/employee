@@ -32,11 +32,17 @@ class App extends Component {
       content: "dashboard",
       baseUrl: "http://localhost:8080/api/",
       systems: [],
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "token " + this.getUser().accessToken,
-      },
     };
+  }
+
+  componentDidMount() {
+    if (this.getUser())
+      this.setState({
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "token " + this.getUser().accessToken,
+        },
+      });
   }
 
   changeLang = (lang) => {
