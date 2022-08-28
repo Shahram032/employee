@@ -114,7 +114,7 @@ class Table extends Component {
   getSrtFlt = (col) => {
     let filterColor = "white";
     if (this.state.filter === col) {
-      filterColor = "blue";
+      filterColor = "#511d5f";
     }
     let tmp = this.state.srt[col];
     if (tmp) {
@@ -122,14 +122,14 @@ class Table extends Component {
         return (
           <div className="d-flex">
             {CustomIcon("FaFilter", 12, filterColor)}
-            {CustomIcon("FaArrowUp", 12, "Green")}
+            {CustomIcon("FaArrowUp", 12, "#60b359")}
           </div>
         );
       else
         return (
           <div className="d-flex">
             {CustomIcon("FaFilter", 12, filterColor)}
-            {CustomIcon("FaArrowDown", 12, "Red")}
+            {CustomIcon("FaArrowDown", 12, "#ea4d6a")}
           </div>
         );
     }
