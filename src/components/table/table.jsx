@@ -19,6 +19,7 @@ class Table extends Component {
       srt: {},
       filter: "id",
       selectedRecord: {},
+      search: "",
     };
   }
 
@@ -30,7 +31,7 @@ class Table extends Component {
   }
 
   resetFilter = () => {
-    this.setState({ filter: "id" });
+    this.setState({ filter: "id", search: "" });
   };
 
   getContentUrl = (content) => {
@@ -77,6 +78,14 @@ class Table extends Component {
     for (let i = 0; i < collection.length; i++) {
       collection[i].classList.remove("selectedRow");
     }
+  };
+
+  searchOnChange = (event) => {
+    this.setState({ search: event.target.value });
+  };
+
+  search = () => {
+    console.log(this.state.search);
   };
 
   getContent = async () => {
@@ -156,6 +165,7 @@ class Table extends Component {
             <button
               className="btn btn-sm btn-outline-success mb-2"
               type="button"
+              onClick={this.search}
             >
               <Translate>Search</Translate>
             </button>
@@ -164,6 +174,8 @@ class Table extends Component {
               type="search"
               placeholder={GetTranslate(this.state.filter)}
               aria-label="Search"
+              value={this.state.search}
+              onChange={this.searchOnChange}
             />
             <button
               className="btn btn-sm btn-outline-danger mb-2"
